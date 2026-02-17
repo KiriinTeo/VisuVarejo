@@ -1,6 +1,5 @@
 package io.github.kiriinteo.visuvarejo.core.domain;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
