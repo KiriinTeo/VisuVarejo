@@ -1,0 +1,44 @@
+package io.github.kiriinteo.visuvarejo.core.domain;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class Sale {
+
+    private final UUID id;
+    private final LocalDateTime date;
+    private final List<SaleItem> items = new ArrayList<>();
+
+    public Sale(UUID id) {
+        this.id = id;
+        this.date = LocalDateTime.now();
+    }
+
+    public void addItem(SaleItem item) {
+        items.add(item);
+    }
+
+    public Money calculateTotal() {
+        Money total = new Money(java.math.BigDecimal.ZERO);
+
+        for (SaleItem item : items) {
+            total = total.add(item.getTotal());
+        }
+
+        return total;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public List<SaleItem> getItems() {
+        return List.copyOf(items);
+    }
+}
