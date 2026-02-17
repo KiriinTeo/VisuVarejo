@@ -1,0 +1,31 @@
+package io.github.kiriinteo.visuvarejo.infra.persistence.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "sales")
+public class SaleEntity {
+
+    @Id
+    private UUID id;
+
+    private LocalDateTime date;
+
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleItemEntity> items = new ArrayList<>();
+
+    protected SaleEntity() {}
+
+    public SaleEntity(UUID id, LocalDateTime date) {
+        this.id = id;
+        this.date = date;
+    }
+
+    public UUID getId() { return id; }
+    public LocalDateTime getDate() { return date; }
+    public List<SaleItemEntity> getItems() { return items; }
+}
