@@ -2,6 +2,7 @@ package io.github.kiriinteo.visuvarejo.infra.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -16,24 +17,25 @@ public class SaleItemEntity {
     @JoinColumn(name = "sale_id")
     private SaleEntity sale;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private ProductEntity product;
+    @Column(name = "product_id", nullable = false)
+    private UUID productId;
 
     private int quantity;
+    private BigDecimal unitPrice;
 
     protected SaleItemEntity() {}
 
-    public SaleItemEntity(SaleEntity sale,
-                          ProductEntity product,
-                          int quantity) {
+    public SaleItemEntity(SaleEntity sale, UUID productId, int quantity, BigDecimal unitPrice) {
         this.sale = sale;
-        this.product = product;
+        this.productId = productId;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
     }
 
     public UUID getId() { return id; }
     public SaleEntity getSale() { return sale; }
-    public ProductEntity getProduct() { return product; }
+    public UUID getProductId() { return productId; }
+    public BigDecimal getUnitPrice() { return unitPrice; }
     public int getQuantity() { return quantity; }
+    
 }

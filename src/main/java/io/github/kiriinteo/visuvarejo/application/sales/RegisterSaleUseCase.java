@@ -14,8 +14,7 @@ public class RegisterSaleUseCase {
     private final ProductRepository productRepository;
     private final SaleRepository saleRepository;
 
-    public RegisterSaleUseCase(ProductRepository productRepository,
-                               SaleRepository saleRepository) {
+    public RegisterSaleUseCase(ProductRepository productRepository, SaleRepository saleRepository) {
         this.productRepository = productRepository;
         this.saleRepository = saleRepository;
     }
@@ -28,9 +27,9 @@ public class RegisterSaleUseCase {
 
             Product product = productRepository
                     .findById(itemRequest.productId())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-            SaleItem item = new SaleItem(product, itemRequest.quantity());
+            SaleItem item = new SaleItem(product.getId(), itemRequest.quantity(), product.getPrice());
             sale.addItem(item);
         }
 

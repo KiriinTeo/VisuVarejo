@@ -1,12 +1,15 @@
 package io.github.kiriinteo.visuvarejo.core.domain;
 
+import java.util.UUID;
+
 public class SaleItem {
 
-    private final Product product;
+    private final UUID productId;
     private final int quantity;
+    private Money unitPrice;
 
-    public SaleItem(Product product, int quantity) {
-        if (product == null) {
+    public SaleItem(UUID productId, int quantity, Money unitPrice) {
+        if (productId == null) {
             throw new IllegalArgumentException("Product cannot be null");
         }
 
@@ -14,16 +17,21 @@ public class SaleItem {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
-        this.product = product;
+        this.productId = productId;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
     }
 
     public Money getTotal() {
-        return product.getPrice().multiply(quantity);
+        return unitPrice.multiply(quantity);
     }
 
-    public Product getProduct() {
-        return product;
+    public UUID getProductId() {
+        return productId;
+    }
+
+    public Money getUnitPrice() { 
+        return unitPrice; 
     }
 
     public int getQuantity() {

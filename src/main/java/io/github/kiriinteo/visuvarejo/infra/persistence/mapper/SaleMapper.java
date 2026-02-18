@@ -13,12 +13,12 @@ public class SaleMapper {
         );
 
         sale.getItems().forEach(item -> {
-            ProductEntity productEntity = ProductMapper.toEntity(item.getProduct());
 
             SaleItemEntity itemEntity = new SaleItemEntity(
-                    saleEntity,
-                    productEntity,
-                    item.getQuantity()
+                saleEntity,
+                item.getProductId(),
+                item.getQuantity(),
+                item.getUnitPrice().getValue()
             );
 
             saleEntity.getItems().add(itemEntity);
@@ -33,11 +33,10 @@ public class SaleMapper {
 
         entity.getItems().forEach(itemEntity -> {
 
-            Product product = ProductMapper.toDomain(itemEntity.getProduct());
-
             SaleItem item = new SaleItem(
-                    product,
-                    itemEntity.getQuantity()
+                itemEntity.getProductId(),
+                itemEntity.getQuantity(),
+                new Money(itemEntity.getUnitPrice())
             );
 
             sale.addItem(item);
@@ -46,3 +45,4 @@ public class SaleMapper {
         return sale;
     }
 }
+
