@@ -41,4 +41,8 @@ public class Sale {
     public List<SaleItem> getItems() {
         return List.copyOf(items);
     }
+
+    public Money getTotalAmount() {
+        return calculateTotal();
+    }
 }
