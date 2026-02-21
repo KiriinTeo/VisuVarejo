@@ -1,6 +1,7 @@
 package io.github.kiriinteo.visuvarejo.infra.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +11,18 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private final String jwtSecret = "inserirumachavecriadacomopensslaquiporgaborfavor198312837438487";
-    private final long jwtExpirationMs = 86400000; // 24h
+    private static final String SECRET =
+            "bXlTdXBlclNlY3JldEtleUZvclZpc3VWYXJlam9KU1Rlc3QxMjM0NTY3ODkwMTIz";
 
-    private final Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+    private final Key key =
+        Keys.hmacShaKeyFor("minhachavesecretaextremamentesegura123456".getBytes());
+
+    private final long EXPIRATION = 86400000;
 
     public String generateToken(String email, String role, String companyId) {
 
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
+        Date expiryDate = new Date(now.getTime() + EXPIRATION);
 
         return Jwts.builder()
                 .setSubject(email)
@@ -46,7 +50,8 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace(); // ← ADICIONE ISSO
             return false;
         }
     }
