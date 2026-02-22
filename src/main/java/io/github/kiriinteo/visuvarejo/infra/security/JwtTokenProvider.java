@@ -1,7 +1,6 @@
 package io.github.kiriinteo.visuvarejo.infra.security;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +10,8 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private static final String SECRET =
-            "bXlTdXBlclNlY3JldEtleUZvclZpc3VWYXJlam9KU1Rlc3QxMjM0NTY3ODkwMTIz";
+    /*private static final String SECRET =
+            "bXlTdXBlclNlY3JldEtleUZvclZpc3VWYXJlam9KU1Rlc3QxMjM0NTY3ODkwMTIz"; */
 
     private final Key key =
         Keys.hmacShaKeyFor("minhachavesecretaextremamentesegura123456".getBytes());
@@ -51,7 +50,7 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
-            ex.printStackTrace(); // ← ADICIONE ISSO
+            ex.printStackTrace(); 
             return false;
         }
     }
