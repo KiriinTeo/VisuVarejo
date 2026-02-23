@@ -23,19 +23,24 @@ public class SaleItemEntity {
     private int quantity;
     private BigDecimal unitPrice;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     protected SaleItemEntity() {}
 
-    public SaleItemEntity(SaleEntity sale, UUID productId, int quantity, BigDecimal unitPrice) {
+    public SaleItemEntity(SaleEntity sale, UUID productId, int quantity, BigDecimal unitPrice, String name) {
         this.sale = sale;
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.name = name;
     }
 
     public UUID getId() { return id; }
     public SaleEntity getSale() { return sale; }
     public UUID getProductId() { return productId; }
     public BigDecimal getUnitPrice() { return unitPrice; }
+    public String getName() { return name; }
     public int getQuantity() { return quantity; }
     
 }

@@ -48,7 +48,8 @@ public class SaleController {
                         .map(item -> new SaleResponse.Item(
                                 item.getProductId(),
                                 item.getQuantity(),
-                                item.getUnitPrice().getValue()
+                                item.getUnitPrice().getValue(),
+                                item.getName()
                         ))
                         .collect(Collectors.toList())
         );

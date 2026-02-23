@@ -29,7 +29,7 @@ public class RegisterSaleUseCase {
                     .findById(itemRequest.productId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-            SaleItem item = new SaleItem(product.getId(), itemRequest.quantity(), product.getPrice());
+            SaleItem item = new SaleItem(product.getId(), itemRequest.quantity(), product.getPrice(), product.getName());
             sale.addItem(item);
         }
 

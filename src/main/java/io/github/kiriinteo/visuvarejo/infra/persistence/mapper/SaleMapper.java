@@ -18,7 +18,8 @@ public class SaleMapper {
                 saleEntity,
                 item.getProductId(),
                 item.getQuantity(),
-                item.getUnitPrice().getValue()
+                item.getUnitPrice().getValue(),
+                item.getName()
             );
 
             saleEntity.getItems().add(itemEntity);
@@ -36,7 +37,8 @@ public class SaleMapper {
             SaleItem item = new SaleItem(
                 itemEntity.getProductId(),
                 itemEntity.getQuantity(),
-                new Money(itemEntity.getUnitPrice())
+                new Money(itemEntity.getUnitPrice()),
+                itemEntity.getName()
             );
 
             sale.addItem(item);

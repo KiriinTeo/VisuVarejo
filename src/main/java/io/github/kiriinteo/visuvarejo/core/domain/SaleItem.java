@@ -7,19 +7,25 @@ public class SaleItem {
     private final UUID productId;
     private final int quantity;
     private Money unitPrice;
+    private String name;
 
-    public SaleItem(UUID productId, int quantity, Money unitPrice) {
+    public SaleItem(UUID productId, int quantity, Money unitPrice, String name) {
         if (productId == null) {
-            throw new IllegalArgumentException("Product cannot be null");
+            throw new IllegalArgumentException("Produto ID não pode ser nulo");
         }
 
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than zero");
+            throw new IllegalArgumentException("Quantidade deve ser maior que zero");
+        }
+
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome do produto não pode ser nulo ou vazio");
         }
 
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.name = name;
     }
 
     public Money getTotal() {
@@ -36,5 +42,9 @@ public class SaleItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public String getName() {
+        return name;
     }
 }

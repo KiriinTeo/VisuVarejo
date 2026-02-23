@@ -14,6 +14,7 @@ public record SaleResponse(
     public record Item(
             UUID productId,
             int quantity,
-            BigDecimal unitPrice
+            BigDecimal unitPrice,
+            String name
     ) {}
 }

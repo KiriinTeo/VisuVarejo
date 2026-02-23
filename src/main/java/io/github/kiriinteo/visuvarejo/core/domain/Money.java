@@ -9,7 +9,7 @@ public class Money {
 
     public Money(BigDecimal value) {
         if (value == null || value.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Money cannot be negative");
+            throw new IllegalArgumentException("Dinheiro não pode ser negativo");
         }
         this.value = value.setScale(2, RoundingMode.HALF_EVEN);
     }
@@ -29,5 +29,5 @@ public class Money {
     public boolean isGreaterThanZero() {
         return value.compareTo(BigDecimal.ZERO) > 0;
     }
-    
+
 }
