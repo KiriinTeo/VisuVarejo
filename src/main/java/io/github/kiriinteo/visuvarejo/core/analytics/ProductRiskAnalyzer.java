@@ -7,7 +7,12 @@ public class ProductRiskAnalyzer {
     public ProductRiskResult analyze(String productId, List<Double> values) {
 
         if (values.size() < 2) {
-            throw new IllegalArgumentException("Dados Insufientes. Ao menos 2 diferentes necessários");
+            return new ProductRiskResult(
+                productId,
+                0.0,
+                0.0,
+                ProductRiskResult.RiskLevel.HEALTHY
+            );
         }
 
         int n = values.size();

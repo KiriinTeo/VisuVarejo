@@ -1,6 +1,8 @@
 package io.github.kiriinteo.visuvarejo.adapter.web.analytics;
 
 import io.github.kiriinteo.visuvarejo.core.domain.Period;
+import io.github.kiriinteo.visuvarejo.application.analytics.GetSalesMetricsUseCase;
+import io.github.kiriinteo.visuvarejo.application.analytics.GetTrendAnalysisUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetProductRiskAnalysisUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetAverageTicketUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetRevenueByPeriodUseCase;
@@ -9,6 +11,7 @@ import io.github.kiriinteo.visuvarejo.adapter.web.analytics.dto.ProductRiskRespo
 import io.github.kiriinteo.visuvarejo.adapter.web.analytics.dto.RevenueResponse;
 import io.github.kiriinteo.visuvarejo.adapter.web.analytics.dto.TicketAverageResponse;
 import io.github.kiriinteo.visuvarejo.adapter.web.analytics.dto.GrowthScoreResponse;
+import io.github.kiriinteo.visuvarejo.adapter.web.analytics.dto.MetricsResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +30,16 @@ public class AnalyticsController {
     private final GetAverageTicketUseCase getAverageTicketUseCase;
     private final GetProductRiskAnalysisUseCase getProductRiskAnalysisUseCase;
     private final GetGrowthScoreUseCase getGrowthScoreUseCase;
+    private final GetSalesMetricsUseCase getSalesMetricsUseCase;
+    private final GetTrendAnalysisUseCase getTrendAnalysisUseCase;
 
-    public AnalyticsController(GetRevenueByPeriodUseCase getRevenueByPeriodUseCase, GetAverageTicketUseCase getAverageTicketUseCase, GetProductRiskAnalysisUseCase getProductRiskAnalysisUseCase, GetGrowthScoreUseCase getGrowthScoreUseCase) {
+    public AnalyticsController(GetRevenueByPeriodUseCase getRevenueByPeriodUseCase, GetAverageTicketUseCase getAverageTicketUseCase, GetProductRiskAnalysisUseCase getProductRiskAnalysisUseCase, GetGrowthScoreUseCase getGrowthScoreUseCase, GetSalesMetricsUseCase getSalesMetricsUseCase, GetTrendAnalysisUseCase getTrendAnalysisUseCase) {
         this.getRevenueByPeriodUseCase = getRevenueByPeriodUseCase;
         this.getAverageTicketUseCase = getAverageTicketUseCase;
         this.getProductRiskAnalysisUseCase = getProductRiskAnalysisUseCase;
         this.getGrowthScoreUseCase = getGrowthScoreUseCase;
+        this.getSalesMetricsUseCase = getSalesMetricsUseCase;
+        this.getTrendAnalysisUseCase = getTrendAnalysisUseCase;
     }
 
     @GetMapping("/revenue")
@@ -90,5 +97,39 @@ public class AnalyticsController {
                         r.getVolatility()
                 ))
                 .toList();
+    }
+
+    @GetMapping("/metrics")
+    public MetricsResponse getMetrics(
+            @RequestParam LocalDateTime start,
+            @RequestParam LocalDateTime end
+    ) {
+
+        Period period = new Period(start.toLocalDate(), end.toLocalDate());
+
+        var metrics = getSalesMetricsUseCase.execute(period);
+
+        return new MetricsResponse(
+                start,
+                end,
+                metrics.getTotalRevenue().getValue().doubleValue(),
+                metrics.getTotalItemsSold()
+        );
+    }
+
+    @GetMapping("/trend-comparison")
+    public double getTrendComparison(
+            @RequestParam LocalDateTime previousStart,
+            @RequestParam LocalDateTime previousEnd,
+            @RequestParam LocalDateTime currentStart,
+            @RequestParam LocalDateTime currentEnd
+    ) {
+
+        return getTrendAnalysisUseCase.execute(
+                previousStart.toLocalDate(),
+                previousEnd.toLocalDate(),
+                currentStart.toLocalDate(),
+                currentEnd.toLocalDate()
+        );
     }
 }

@@ -7,6 +7,7 @@ import io.github.kiriinteo.visuvarejo.application.catalog.CreateProductUseCase;
 import io.github.kiriinteo.visuvarejo.application.catalog.GetAllProductsUseCase;
 import io.github.kiriinteo.visuvarejo.application.catalog.GetProductByIdUseCase;
 import io.github.kiriinteo.visuvarejo.application.catalog.UpdateProductUseCase;
+import io.github.kiriinteo.visuvarejo.core.port.ProductRepository;
 
 
 import io.github.kiriinteo.visuvarejo.core.domain.Product;
@@ -25,12 +26,15 @@ public class ProductController {
     private final GetAllProductsUseCase getAllProductsUseCase;
     private final GetProductByIdUseCase getProductByIdUseCase;
     private final UpdateProductUseCase updateProductUseCase;
+    private final ProductRepository productRepository;
 
-    public ProductController(CreateProductUseCase createProductUseCase, GetAllProductsUseCase getAllProductsUseCase, GetProductByIdUseCase getProductByIdUseCase, UpdateProductUseCase updateProductUseCase) {
+
+    public ProductController(CreateProductUseCase createProductUseCase, GetAllProductsUseCase getAllProductsUseCase, GetProductByIdUseCase getProductByIdUseCase, UpdateProductUseCase updateProductUseCase, ProductRepository productRepository) {
         this.createProductUseCase = createProductUseCase;
         this.getAllProductsUseCase = getAllProductsUseCase;
         this.getProductByIdUseCase = getProductByIdUseCase;
         this.updateProductUseCase = updateProductUseCase;
+        this.productRepository = productRepository;
     }
 
     @PostMapping
@@ -38,13 +42,15 @@ public class ProductController {
 
         Product product = createProductUseCase.execute(
                 request.name(),
-                request.price()
+                request.price(),
+                request.categoryId()
         );
 
         return new ProductResponse(
                 product.getId(),
                 product.getName(),
                 product.getPrice().getValue(),
+                product.getCategoryId(),
                 product.isActive()
         );
     }
@@ -67,5 +73,13 @@ public class ProductController {
         return updateProductUseCase.execute(id, request);
     }
 
-    
+    @GetMapping("/by-category/{categoryId}")
+    public List<ProductResponse> getByCategory(@PathVariable UUID categoryId) {
+
+        return productRepository.findByCategoryId(categoryId)
+                .stream()
+                .map(ProductResponse::fromDomain)
+                .toList();
+    }
+        
 }

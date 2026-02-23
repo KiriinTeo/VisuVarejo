@@ -70,4 +70,12 @@ public class ProductRepositoryImpl implements ProductRepository {
         ProductEntity updated = jpaRepository.save(entity);
         return ProductMapper.toDomain(updated);
     }
+
+    @Override
+    public List<Product> findByCategoryId(UUID categoryId) {
+        return jpaRepository.findByCategoryId(categoryId)
+                .stream()
+                .map(ProductMapper::toDomain)
+                .collect(Collectors.toList());
+    }
 }

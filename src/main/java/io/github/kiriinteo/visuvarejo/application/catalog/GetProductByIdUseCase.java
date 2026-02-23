@@ -25,6 +25,7 @@ public class GetProductByIdUseCase {
                 product.getId(),
                 product.getName(),
                 product.getPrice().getValue(),
+                product.getCategoryId(),
                 product.isActive()
         );
     }

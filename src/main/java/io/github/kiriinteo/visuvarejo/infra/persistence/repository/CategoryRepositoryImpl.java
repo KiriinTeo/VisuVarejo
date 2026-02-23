@@ -45,4 +45,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     public void deleteById(UUID id) {
         jpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(UUID categoryId) {
+        return jpaRepository.existsById(categoryId);
+    }
 }

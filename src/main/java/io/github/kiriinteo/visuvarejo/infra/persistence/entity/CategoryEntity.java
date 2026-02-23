@@ -12,7 +12,7 @@ public class CategoryEntity {
 
     private String name;
 
-    protected CategoryEntity() {}
+    public CategoryEntity() {}
 
     public CategoryEntity(UUID id, String name) {
         this.id = id;
@@ -20,5 +20,7 @@ public class CategoryEntity {
     }
 
     public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+
     public String getName() { return name; }
 }

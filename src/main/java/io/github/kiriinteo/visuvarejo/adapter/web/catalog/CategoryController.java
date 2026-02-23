@@ -46,4 +46,5 @@ public class CategoryController {
                 category.getName()
         );
     }
+
 }

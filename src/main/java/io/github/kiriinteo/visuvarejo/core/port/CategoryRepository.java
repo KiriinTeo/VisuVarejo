@@ -15,4 +15,6 @@ public interface CategoryRepository {
     List<Category> findAll();
 
     void deleteById(UUID id);
+
+    boolean existsById(UUID categoryId);
 }

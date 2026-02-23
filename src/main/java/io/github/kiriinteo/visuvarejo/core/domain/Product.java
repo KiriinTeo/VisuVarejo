@@ -8,8 +8,9 @@ public class Product {
     private String name;
     private Money price;
     private boolean active;
+    private UUID categoryId;
 
-    public Product(UUID id, String name, Money price) {
+    public Product(UUID id, String name, Money price, UUID categoryId) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Nome de produto não pode ser vazio");
         }
@@ -18,10 +19,15 @@ public class Product {
             throw new IllegalArgumentException("Preço do produto deve ser maior que zero");
         }
 
+        if (categoryId == null) {
+            throw new IllegalArgumentException("Produto deve pertencer a uma categoria");
+        }
+
         this.id = id;
         this.name = name;
         this.price = price;
         this.active = true;
+        this.categoryId = categoryId;
     }
 
     public UUID getId() {
@@ -34,6 +40,10 @@ public class Product {
 
     public Money getPrice() {
         return price;
+    }
+
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
     public boolean isActive() {

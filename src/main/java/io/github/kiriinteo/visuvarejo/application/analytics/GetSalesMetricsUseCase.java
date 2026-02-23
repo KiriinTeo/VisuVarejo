@@ -4,6 +4,7 @@ import io.github.kiriinteo.visuvarejo.core.analytics.SalesMetrics;
 import io.github.kiriinteo.visuvarejo.core.domain.Money;
 import io.github.kiriinteo.visuvarejo.core.domain.Sale;
 import io.github.kiriinteo.visuvarejo.core.port.SaleRepository;
+import io.github.kiriinteo.visuvarejo.core.domain.Period;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,9 +19,9 @@ public class GetSalesMetricsUseCase {
         this.saleRepository = saleRepository;
     }
 
-    public SalesMetrics execute() {
+    public SalesMetrics execute(Period period) {
 
-        List<Sale> sales = saleRepository.findAll();
+        List<Sale> sales = saleRepository.findByPeriod(period);
 
         Money totalRevenue = new Money(BigDecimal.ZERO);
         int totalItems = 0;
