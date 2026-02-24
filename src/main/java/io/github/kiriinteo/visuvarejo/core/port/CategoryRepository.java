@@ -1,9 +1,7 @@
 package io.github.kiriinteo.visuvarejo.core.port;
 
-import io.github.kiriinteo.visuvarejo.adapter.web.catalog.dto.CategoryResponse;
 import io.github.kiriinteo.visuvarejo.core.domain.Category;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

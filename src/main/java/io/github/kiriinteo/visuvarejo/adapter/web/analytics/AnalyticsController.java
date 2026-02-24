@@ -1,6 +1,8 @@
 package io.github.kiriinteo.visuvarejo.adapter.web.analytics;
 
+import io.github.kiriinteo.visuvarejo.core.alerts.Alert;
 import io.github.kiriinteo.visuvarejo.core.domain.Period;
+import io.github.kiriinteo.visuvarejo.application.analytics.AlertGenerationUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetSalesMetricsUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetTrendAnalysisUseCase;
 import io.github.kiriinteo.visuvarejo.application.analytics.GetProductRiskAnalysisUseCase;
@@ -32,14 +34,16 @@ public class AnalyticsController {
     private final GetGrowthScoreUseCase getGrowthScoreUseCase;
     private final GetSalesMetricsUseCase getSalesMetricsUseCase;
     private final GetTrendAnalysisUseCase getTrendAnalysisUseCase;
+    private final AlertGenerationUseCase alertGenerationUseCase;
 
-    public AnalyticsController(GetRevenueByPeriodUseCase getRevenueByPeriodUseCase, GetAverageTicketUseCase getAverageTicketUseCase, GetProductRiskAnalysisUseCase getProductRiskAnalysisUseCase, GetGrowthScoreUseCase getGrowthScoreUseCase, GetSalesMetricsUseCase getSalesMetricsUseCase, GetTrendAnalysisUseCase getTrendAnalysisUseCase) {
+        public AnalyticsController(GetRevenueByPeriodUseCase getRevenueByPeriodUseCase, GetAverageTicketUseCase getAverageTicketUseCase, GetProductRiskAnalysisUseCase getProductRiskAnalysisUseCase, GetGrowthScoreUseCase getGrowthScoreUseCase, GetSalesMetricsUseCase getSalesMetricsUseCase, GetTrendAnalysisUseCase getTrendAnalysisUseCase, AlertGenerationUseCase alertGenerationUseCase) {
         this.getRevenueByPeriodUseCase = getRevenueByPeriodUseCase;
         this.getAverageTicketUseCase = getAverageTicketUseCase;
         this.getProductRiskAnalysisUseCase = getProductRiskAnalysisUseCase;
         this.getGrowthScoreUseCase = getGrowthScoreUseCase;
         this.getSalesMetricsUseCase = getSalesMetricsUseCase;
         this.getTrendAnalysisUseCase = getTrendAnalysisUseCase;
+        this.alertGenerationUseCase = alertGenerationUseCase;
     }
 
     @GetMapping("/revenue")
@@ -126,6 +130,22 @@ public class AnalyticsController {
     ) {
 
         return getTrendAnalysisUseCase.execute(
+                previousStart.toLocalDate(),
+                previousEnd.toLocalDate(),
+                currentStart.toLocalDate(),
+                currentEnd.toLocalDate()
+        );
+    }
+
+    @GetMapping("/alerts")
+    public List<Alert> getAlerts(
+            @RequestParam LocalDateTime previousStart,
+            @RequestParam LocalDateTime previousEnd,
+            @RequestParam LocalDateTime currentStart,
+            @RequestParam LocalDateTime currentEnd
+    ) {
+
+        return alertGenerationUseCase.execute(
                 previousStart.toLocalDate(),
                 previousEnd.toLocalDate(),
                 currentStart.toLocalDate(),
