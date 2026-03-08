@@ -1,7 +1,5 @@
 package io.github.kiriinteo.visuvarejo.infra.security;
 
-import io.github.kiriinteo.visuvarejo.infra.security.AuthenticatedUser;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
