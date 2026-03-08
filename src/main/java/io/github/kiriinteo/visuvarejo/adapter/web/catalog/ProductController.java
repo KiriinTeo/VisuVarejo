@@ -51,7 +51,8 @@ public class ProductController {
                 product.getName(),
                 product.getPrice().getValue(),
                 product.getCategoryId(),
-                product.isActive()
+                product.isActive(),
+                product.getCompanyId()
         );
     }
 
