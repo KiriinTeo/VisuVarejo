@@ -41,14 +41,14 @@ API projetada para consumo por aplicações Web (SPA), Mobile ou dashboards anal
 
 ## Diferenciais Técnicos
 
-- 🔐 Autenticação e autorização via JWT com proteção granular de endpoints
-- 🧱 Arquitetura Hexagonal Light (Ports & Adapters simplificado)
-- 🧩 Separação clara entre domínio, aplicação e infraestrutura
-- 📊 Casos de uso modelados explicitamente na camada de aplicação
-- 📦 Uso de DTOs para isolamento entre domínio e transporte
-- 🧠 Regras analíticas encapsuladas em use cases independentes
-- 🛡️ Camada de segurança desacoplada da lógica de negócio
-- 📈 Design orientado a expansão futura (multi-tenant e SaaS)
+-  Autenticação e autorização via JWT com proteção granular de endpoints
+-  Arquitetura Hexagonal Light (Ports & Adapters simplificado)
+-  Separação clara entre domínio, aplicação e infraestrutura
+-  Casos de uso modelados explicitamente na camada de aplicação
+-  Uso de DTOs para isolamento entre domínio e transporte
+-  Regras analíticas encapsuladas em use cases independentes
+-  Camada de segurança desacoplada da lógica de negócio
+-  Design orientado a expansão futura (multi-tenant e SaaS)
 
 ---
 
@@ -233,7 +233,7 @@ Authorization: Bearer SEU_TOKEN
 
 ---
 
-## 1️ Autenticação
+##  Autenticação
 
 ### ➤ Registro
 
@@ -278,7 +278,7 @@ POST /auth/login
 
 ---
 
-## 2️⃣ Catálogo
+##  Catálogo
 
 ### Categories
 
@@ -409,7 +409,7 @@ GET /products/by-category/{categoryId}
 
 ---
 
-## 3️⃣ Vendas
+##  Vendas
 
 ---
 
@@ -463,7 +463,7 @@ GET /sales?start=2026-01-01T00:00:00&end=2026-01-31T23:59:59
 
 ---
 
-## 4️⃣ Analytics
+##  Analytics
 
 Todos os endpoints analíticos recebem datas no formato:
 
