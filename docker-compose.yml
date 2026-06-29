@@ -47,10 +47,10 @@ services:
       DB_PORT: 5432
       DB_NAME: visuvarejo
       DB_USER: visuvarejo
-      DB_PASS: visuvarejo_pass
+      DB_PASS: visuvarejo_pass #outra chave do env
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_SECRET: ${JWT_SECRET:-visuvarejo-secret-key-mude-em-producao-use-256bits}
+      JWT_SECRET: # ${JWT_SECRET:botar a chave de produção como 256bits aqui}
     depends_on:
       postgres:
         condition: service_healthy
