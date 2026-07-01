@@ -60,17 +60,17 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
     
     @Override
-    public List<Category> findAllByTenantId(String tenantId) {
-        return jpaRepository.findAllByTenantId(tenantId)
+    public List<Category> findAllByCompanyId(UUID companyId) {
+        return jpaRepository.findAllByCompanyId(companyId)
                 .stream()
                 .map(CategoryMapper::toDomain)
                 .collect(Collectors.toList());
     }
     
     @Override
-    public Optional<Category> findByIdAndTenantId(UUID id, String tenantId) {       
+    public Optional<Category> findByIdAndCompanyId(UUID id, UUID companyId) {       
         return jpaRepository.findById(id)
-                .filter(categoryEntity -> categoryEntity.getTenantId().equals(tenantId))
+                .filter(categoryEntity -> categoryEntity.getCompanyId().equals(companyId))
                 .map(CategoryMapper::toDomain);
     }
 }

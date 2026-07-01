@@ -24,8 +24,7 @@ public class UserMapper {
                 entity.getEmail(),
                 entity.getPassword(),
                 Role.valueOf(entity.getRole()),
-                CompanyMapper.toDomain(entity.getCompany()),
-                entity.getCompany().getTenantId()
+                CompanyMapper.toDomain(entity.getCompany())
         );
     }
 }

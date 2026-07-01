@@ -26,9 +26,9 @@ public interface ProductRepository {
 
     List<Product> findByCompanyId(UUID companyId);
 
-    List<Product> findAllByTenantId(String tenantId);
+    List<Product> findAllByCompanyId(UUID companyId);
 
-    List<Product> findByCategoryIdAndTenantId(UUID categoryId, String tenantId);
+    List<Product> findByCategoryIdAndCompanyId(UUID categoryId, UUID companyId);
 
-    Optional<Product> findByIdAndTenantId(UUID id, String tenantId);
+    Optional<Product> findByIdAndCompanyId(UUID id, UUID companyId);
 }

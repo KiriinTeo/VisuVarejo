@@ -88,27 +88,27 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> findAllByTenantId(String tenantId) {   
+    public List<Product> findAllByCompanyId(UUID companyId) {   
         return jpaRepository.findAll()
                 .stream()
-                .filter(productEntity -> productEntity.getTenantId().equals(tenantId))
+                .filter(productEntity -> productEntity.getCompanyId().equals(companyId))
                 .map(ProductMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findByCategoryIdAndTenantId(UUID categoryId, String tenantId) {
+    public List<Product> findByCategoryIdAndCompanyId(UUID categoryId, UUID companyId) {
         return jpaRepository.findByCategoryId(categoryId)
                 .stream()
-                .filter(productEntity -> productEntity.getTenantId().equals(tenantId))
+                .filter(productEntity -> productEntity.getCompanyId().equals(companyId))
                 .map(ProductMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Product> findByIdAndTenantId(UUID id, String tenantId) {
+    public Optional<Product> findByIdAndCompanyId(UUID id, UUID companyId) {
         return jpaRepository.findById(id)
-                .filter(productEntity -> productEntity.getTenantId().equals(tenantId))
+                .filter(productEntity -> productEntity.getCompanyId().equals(companyId))
                 .map(ProductMapper::toDomain);
     }
 }

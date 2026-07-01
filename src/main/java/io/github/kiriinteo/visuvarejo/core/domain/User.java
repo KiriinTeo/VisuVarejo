@@ -10,21 +10,18 @@ public class User {
     private String password;
     private Role role;
     private Company company;
-    private String tenantId;
 
     public User(UUID id,
                 String name,
                 String email,
                 String password,
                 Role role,
-                Company company,
-                String tenantId) {
+                Company company) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.tenantId = tenantId;
         this.company = company;
     }
 
@@ -32,9 +29,8 @@ public class User {
                 String email,
                 String password,
                 Role role,
-                Company company,
-                String tenantId) {
-        this(UUID.randomUUID(), name, email, password, role, company, tenantId);
+                Company company) {
+        this(UUID.randomUUID(), name, email, password, role, company);
     }
 
     public UUID getId() {
@@ -59,10 +55,6 @@ public class User {
 
     public Company getCompany() {
         return company;
-    }
-
-    public String getTenantId() {
-        return tenantId;
     }
     
 }

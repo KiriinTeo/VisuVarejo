@@ -22,8 +22,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String role;
 
-    @Column(name = "tenantId", nullable = false)
-    private String tenantId;
+    @Column(name = "company_id", nullable = false, insertable = false, updatable = false)
+    private UUID companyId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = false)
@@ -51,5 +51,5 @@ public class UserEntity {
     public String getPassword() { return password; }
     public String getRole() { return role; }
     public CompanyEntity getCompany() { return company; }
-    public String getTenantId() { return tenantId; }
+    public UUID getCompanyId() { return company != null ? company.getId() : null; }
 }

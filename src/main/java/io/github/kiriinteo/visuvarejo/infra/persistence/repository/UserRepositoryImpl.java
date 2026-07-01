@@ -39,16 +39,16 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override   
-    public Optional<User> findByEmailAndTenantId(String email, String tenantId) {
-        return jpaRepository.findByEmailAndTenantId(email, tenantId)
+    public Optional<User> findByEmailAndCompanyId(String email, UUID companyId) {
+        return jpaRepository.findByEmailAndCompanyId(email, companyId)
                 .map(UserMapper::toDomain);
     }
 
     @Override
-    public List<User> findAllByTenantId(String tenantId) {
+    public List<User> findAllByCompanyId(UUID companyId) {
         return jpaRepository.findAll()
                 .stream()
-                .filter(userEntity -> tenantId.equals(userEntity.getTenantId()))
+                .filter(userEntity -> companyId.equals(userEntity.getCompanyId()))
                 .map(UserMapper::toDomain)
                 .collect(Collectors.toList());
     }

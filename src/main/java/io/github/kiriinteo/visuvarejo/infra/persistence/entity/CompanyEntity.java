@@ -16,9 +16,6 @@ public class CompanyEntity {
     @Column(nullable = false, unique = true)
     private String document;
 
-    @Column(name = "tenantId", nullable = false)
-    private String tenantId;
-
     protected CompanyEntity() {}
 
     public CompanyEntity(UUID id, String name, String document) {
@@ -37,9 +34,5 @@ public class CompanyEntity {
 
     public String getDocument() {
         return document;
-    }
-
-    public String getTenantId() {
-        return tenantId;
     }
 }

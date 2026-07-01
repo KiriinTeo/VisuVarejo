@@ -5,6 +5,5 @@ public record RegisterRequest(
         String email,
         String password,
         String companyName,
-        String companyDocument,
-        String tenantId
+        String companyDocument
 ) {}

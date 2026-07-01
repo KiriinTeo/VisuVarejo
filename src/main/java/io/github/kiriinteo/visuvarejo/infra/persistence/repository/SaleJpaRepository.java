@@ -12,5 +12,5 @@ public interface SaleJpaRepository extends JpaRepository<SaleEntity, UUID> {
 
     List<SaleEntity> findByDateBetween(LocalDateTime start, LocalDateTime end);
 
-    List<SaleEntity> findByTenantIdAndSaleDateBetween(String tenantId, LocalDateTime start, LocalDateTime end);
+    List<SaleEntity> findByCompanyIdAndDateBetween(UUID companyId, LocalDateTime start, LocalDateTime end);
 }

@@ -14,7 +14,7 @@ public interface UserRepository {
 
     Optional<User> findByEmail(String email);
 
-    Optional<User> findByEmailAndTenantId(String email, String tenantId);
+    Optional<User> findByEmailAndCompanyId(String email, UUID companyId);
 
-    List<User> findAllByTenantId(String tenantId);
+    List<User> findAllByCompanyId(UUID companyId);
 }

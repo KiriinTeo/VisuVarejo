@@ -63,18 +63,18 @@ public class SaleRepositoryImpl implements SaleRepository {
     }
 
     @Override
-    public List<Sale> findByTenantIdAndSaleDateBetween(String tenantId, LocalDateTime start, LocalDateTime end) {
-        return jpaRepository.findByTenantIdAndSaleDateBetween(tenantId, start, end)
+    public List<Sale> findByCompanyIdAndDateBetween(UUID companyId, LocalDateTime start, LocalDateTime end) {
+        return jpaRepository.findByCompanyIdAndDateBetween(companyId, start, end)
                 .stream()
                 .map(SaleMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Sale> findAllByTenantId(String tenantId) {
+    public List<Sale> findAllByCompanyId(UUID companyId) {
         return jpaRepository.findAll()
                 .stream()
-                .filter(saleEntity -> tenantId.equals(saleEntity.getTenantId()))
+                .filter(saleEntity -> companyId.equals(saleEntity.getCompanyId()))
                 .map(SaleMapper::toDomain)
                 .collect(Collectors.toList());
     }

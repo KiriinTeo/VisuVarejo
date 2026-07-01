@@ -20,7 +20,7 @@ public interface SaleRepository {
 
     List<Sale> findByCompanyId(UUID companyId);
     
-    List<Sale> findByTenantIdAndSaleDateBetween(String tenantId, LocalDateTime start, LocalDateTime end);
+    List<Sale> findByCompanyIdAndDateBetween(UUID companyId, LocalDateTime start, LocalDateTime end);
 
-    List<Sale> findAllByTenantId(String tenantId);
+    List<Sale> findAllByCompanyId(UUID companyId);
 }
